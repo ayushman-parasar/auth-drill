@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const studentSchema = new Schema({
+const mentorSchema = new Schema({
   name: {
     type: String,
     required: true,
@@ -12,11 +12,8 @@ const studentSchema = new Schema({
   password: {
     type: String,
     required: true,
-  },
-  batchNumber: {
-    type: String,
-  },
+  }
 });
 
-const Student = mongoose.model("Student", studentSchema)
-export default Student
+const Mentor = mongoose.model("Mentor", mentorSchema)
+module.exports = Mentor
