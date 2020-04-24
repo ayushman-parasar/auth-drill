@@ -29,6 +29,7 @@ studentSchema.pre("save", function (next) {
 
 //Hash password while comparing at the time of login
 studentSchema.methods.validatePassword = function (password) {
+    console.log("password validation")
   return bcrypt.compareSync(password, this.password);
 };
 

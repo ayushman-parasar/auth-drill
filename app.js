@@ -4,6 +4,8 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose')
+const session = require('express-session')
+const MongoStore = require('connect-mongo')(session)
 
 
 var indexRouter = require('./routes/index');
@@ -31,6 +33,12 @@ mongoose.connect(
     console.log("connected to DB", err ? false : true);
   }
 );
+app.use(session({
+  secret: "ayushman",
+  resave: true,
+  saveUninitialized: false,
+  store: new MongoStore({mongooseConnection: mongoose.connection})
+}))
 app.use('/', indexRouter);
 app.use('/api/v1', apiRouter);
 // app.use('/users', usersRouter);
