@@ -11,5 +11,5 @@ const taskSchema = new Schema({
   }
 });
 
-const Student = mongoose.model("Student", taskSchema)
-export default Student
+const Todo = mongoose.model("Todo", taskSchema)
+module.exports = Todo
