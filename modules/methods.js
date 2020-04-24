@@ -6,7 +6,7 @@ module.exports ={
         try {
             let id = req.user.userID
             const mentor = await Mentor.findById(id)
-            if(mentor){
+            if(await mentor){
                 req.user.mentorChecked = true
             }else{
                 req.user.mentorChecked = false
@@ -16,6 +16,7 @@ module.exports ={
            next(error) 
         }
     },
+
 
     mentorLogin: async (req, res, next) => {
         try {

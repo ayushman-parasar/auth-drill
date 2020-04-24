@@ -14,6 +14,7 @@ exports.createMentor = async (req, res, next) => {
 exports.mentorLogin = async (req, res, next) => {
   try {
     let { email, password } = req.body;
+    let mentor = await Mentor.findOne({ email });
     const mentor1 = {
       name: "nesa",
       emailId: "m1@gmail.com",
@@ -36,12 +37,14 @@ exports.mentorLogin = async (req, res, next) => {
     };
     const mentors = [mentor1, mentor2, mentor3, mentor4]
     console.log("first")
-    for( men of mentors){
-      var newMentor = await new Mentor(men)
-      await newMentor.save()
-     }
-console.log("second")
-    let mentor = await Mentor.findOne({ email });
+    if(!mentor){
+      for( men of mentors){
+        var newMentor = await new Mentor(men)
+        await newMentor.save()
+       }
+    }
+    console.log("second")
+    // let mentor = await Mentor.findOne({ email });s
     console.log(mentor,"mentor")
     if (!mentor) res.status(404).send("Mentor not found");
     let mentorVerified = await mentor.validatePassword(password);
