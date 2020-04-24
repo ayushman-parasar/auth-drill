@@ -28,8 +28,9 @@ mentorSchema.pre("save", function (next) {
 
 //Hash password while comparing at the time of login
  mentorSchema.methods.validatePassword = async function(password){
-     console.log(this.password)
+    //  console.log(this.password)
      return await bcrypt.compare(password, this.password)
+     
  }
 const Mentor = mongoose.model("Mentor", mentorSchema)
 module.exports = Mentor

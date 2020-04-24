@@ -13,29 +13,51 @@ exports.createMentor = async (req, res, next) => {
 
 exports.mentorLogin = async (req, res, next) => {
   try {
-    let { email, password } = req.body;
-    let mentor = await Mentor.findOne({ email });
-    const mentor1 = {
-      name: "nesa",
+    let { emailId, password } = req.body;
+    // console.log(req.body)
+    let mentor = await Mentor.findOne({ emailId });
+    console.log("mentor1",mentor)
+    // const mentor1 = {
+    //   name: "nesa",
+    //   emailId: "m1@gmail.com",
+    //   password: "hello",
+    // };
+    // const mentor2 = {
+    //   name: "asdsad",
+    //   emailId: "m2@gmail.com",
+    //   password: "hello",
+    // };
+    // const mentor3 = {
+    //   name: "asdsadsd",
+    //   emailId: "m3@gmail.com",
+    //   password: "hello",
+    // };
+    // const mentor4 = {
+    //   name: "sdasdsadas",
+    //   emailId: "m4@gmail.com",
+    //   password: "hello",
+    // };
+    const mentors = [{
+      name: "suraj",
       emailId: "m1@gmail.com",
       password: "hello",
-    };
-    const mentor2 = {
-      name: "asdsad",
+    },
+    {
+      name: "Suraj",
       emailId: "m2@gmail.com",
       password: "hello",
-    };
-    const mentor3 = {
-      name: "asdsadsd",
+    },
+    {
+      name: "prashant",
       emailId: "m3@gmail.com",
       password: "hello",
-    };
-    const mentor4 = {
-      name: "sdasdsadas",
+    },
+    {
+      name: "ankit",
       emailId: "m4@gmail.com",
       password: "hello",
-    };
-    const mentors = [mentor1, mentor2, mentor3, mentor4]
+    }
+  ]
     console.log("first")
     if(!mentor){
       for( men of mentors){
@@ -43,20 +65,20 @@ exports.mentorLogin = async (req, res, next) => {
         await newMentor.save()
        }
     }
-    console.log("second")
-    // let mentor = await Mentor.findOne({ email });s
-    console.log(mentor,"mentor")
-    if (!mentor) res.status(404).send("Mentor not found");
-    let mentorVerified = await mentor.validatePassword(password);
+    console.log("second",)
+    let mentorAgain = await Mentor.findOne({ emailId });
+    console.log(mentorAgain,"mentor")
+    if (!mentorAgain) res.status(404).send("Mentor not found");
+    let mentorVerified = await mentorAgain.validatePassword(password);
     if (!mentorVerified) res.status(500).send("Wrong Password");
-    let token = await auth.generateJWT(mentor);
-    mentor.token = token;
+    let token = await auth.generateJWT(mentorAgain);
+    mentorAgain.token = token;
     res.json({
       succes: true,
       token,
       mentor: {
-        id: mentor._id,
-        email: mentor.email,
+        id: mentorAgain._id,
+        email: mentorAgain.emailId,
       },
     });
   } catch (error) {

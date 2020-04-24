@@ -19,7 +19,7 @@ module.exports = {
         var verification = await jwt.verify(token, process.env.secret);
 
         req.user = verification;
-        console.log('auth',req.user)  
+        // console.log('auth',req.user)  
         next();
       } catch (error) {
         console.log("veriification ", error);
