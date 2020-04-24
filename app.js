@@ -3,11 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const mongoose = require('mongoose')
-require("dotenv").config();
+
+
 
 var indexRouter = require('./routes/index');
-const apiRouter = require('./routes/api/v1')
+
 var app = express();
 
 // view engine setup
@@ -20,16 +20,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-mongoose.connect(
-  "mongodb://localhost/authTesting1",
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  },
-  (err) => {
-    console.log("connected to DB", err ? false : true);
-  }
-);
 
 app.use('/', indexRouter);
 app.use('/api/v1', apiRouter);
