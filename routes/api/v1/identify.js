@@ -15,7 +15,7 @@ router.get('/',auth.verifyToken,methods.checkMentor,async function(req, res, nex
         res.json({student})
     }else{
         const mentor = await  Mentor.findById(id)
-        res.json(mentor)
+        res.json({mentor})
     } 
     
 })
