@@ -1,8 +1,10 @@
 const express = require("express");
 const router = express.Router();
-let { createStudent, studentLogin } = require('../../../controllers/student')
+const auth = require('../../../modules/auth')
+let { createStudent, studentLogin, getTasks } = require('../../../controllers/student')
 
 router.post("/signup", createStudent);
-// router.post("/login", studentLogin);
+router.post("/login", studentLogin);
+router.get('/', auth.verifyToken , getTasks)
 
 module.exports = router
