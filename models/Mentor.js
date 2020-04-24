@@ -4,7 +4,7 @@ const bcrypt = require("bcryptjs");
 const mentorSchema = new Schema({
   name: {
     type: String,
-    required: true,
+  
   },
   emailId: {
     type: String,
@@ -19,6 +19,7 @@ const mentorSchema = new Schema({
 
 // Hash password for new mentor while registering
 mentorSchema.pre("save", function (next) {
+  console.log("pre save",this.password)
   if (this.password) {
     this.password = bcrypt.hashSync(this.password, 10);
   }
