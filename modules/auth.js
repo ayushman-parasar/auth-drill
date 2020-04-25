@@ -11,7 +11,7 @@ exports.loggedUser = async (req, res, next) => {
     } else {
       let id = req.session.mentorId
       const mentor = await Mentor.findById(id);
-      req.currentUser = mentor;
+      req.currentUser = {"mentor":mentor};
       next();
     }
   } catch (error) {
