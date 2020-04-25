@@ -6,6 +6,7 @@ var logger = require('morgan');
 const mongoose = require('mongoose')
 const session = require('express-session')
 const MongoStore = require('connect-mongo')(session)
+require('dotenv').config
 
 
 var indexRouter = require('./routes/index');
@@ -34,7 +35,7 @@ mongoose.connect(
   }
 );
 app.use(session({
-  secret: "ayushman",
+  secret: 'sdsada',
   resave: true,
   saveUninitialized: false,
   store: new MongoStore({mongooseConnection: mongoose.connection})
