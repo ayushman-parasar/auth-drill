@@ -1,4 +1,5 @@
 const Mentor = require("../models/Mentors");
+const Todo = require('../models/Todo')
 
 exports.createMentor = async (req, res, next) => {
   try {
@@ -48,9 +49,30 @@ exports.loginMentor = async (req, res, next)=>{
   if(!mentorVerified) res.status(400).send('wrong password')
   req.session.mentorId = recheckMentor._id
   req.session.isMentor = true
-  mentor.password = null
   res.json({success:true, recheckMentor})
   } catch (error) {
    next(error) 
+  }
+}
+
+exports.createTask = async (req, res, next) =>{
+  try {
+    if(req.session && req.session.isMentor){
+      const task = await Todo.create(req.body)
+      res.json({success:true, task})
+    }
+  } catch (error) {
+    next(error)
+  } 
+}
+
+exports.showTask = async (req, res, next) =>{
+  try {
+    if(req.session && req.session.isMentor){
+      const listTasks = await Todo.find()
+      res.json({success:true, listTasks})
+    }
+  } catch (error) {
+    next(error)
   }
 }

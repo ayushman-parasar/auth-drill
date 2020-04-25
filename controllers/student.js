@@ -34,8 +34,8 @@ exports.studentLogin = async (req, res, next) => {
 exports.showTasks = async (req, res, next) => {
   try {
     if (req.student) {
-      const task = await Todo.find();
-      res.json({success:true, task});
+      const tasks = await Todo.find();
+      res.json({success:true, tasks});
     }
   } catch (error) {
       next(error)
