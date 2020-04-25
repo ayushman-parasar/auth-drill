@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const { createMentor} = require('../../../controllers/mentor')
+const { createMentor, loginMentor } = require('../../../controllers/mentor')
 
 router.post("/signup", createMentor);
+router.post('/login',loginMentor)
 
 module.exports = router
